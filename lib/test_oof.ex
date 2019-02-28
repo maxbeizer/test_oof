@@ -6,7 +6,7 @@ defmodule TestOof do
   I'm an idiot. As an idiot, I often will write tests that I think are great
   and the whole suite passes and I feel great about myself. Only
   later—sometimes much later— do I notice the compiler warning that one of my
-  beautiful tests has the `.ex` extenion and not the `.exs` extenion that
+  beautiful tests has the `.ex` extenion and not the `.exs` extension that
   ExUnit requires to run the test.
 
   This package is an attempt to remove that rake I tend to step on.
