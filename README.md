@@ -1,4 +1,7 @@
 # TestOof
+
+[![CircleCI](https://circleci.com/gh/maxbeizer/test_oof.svg?style=svg)](https://circleci.com/gh/maxbeizer/test_oof)
+
 A tiny test helper tool to make sure all your test files run.
 
 ## Why
