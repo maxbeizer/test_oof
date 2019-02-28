@@ -46,3 +46,8 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/test_oof](https://hexdocs.pm/test_oof).
 
+## Roadmap
+* [ ] Handle umbrella projects
+* [ ] Make it more configurable
+* [ ] Add an option to auto-correct
+* [ ] Add an option to ignore a list of false positives
