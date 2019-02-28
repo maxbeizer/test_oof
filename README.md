@@ -51,3 +51,6 @@ be found at [https://hexdocs.pm/test_oof](https://hexdocs.pm/test_oof).
 * [ ] Make it more configurable
 * [ ] Add an option to auto-correct
 * [ ] Add an option to ignore a list of false positives
+
+## License
+MIT. See LICENSE.
