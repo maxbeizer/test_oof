@@ -42,9 +42,24 @@ Then add the following to your `test_helper.exs`
 TestOof.ensure_test_files_are_exs!()
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/test_oof](https://hexdocs.pm/test_oof).
+Documentation can be found at
+[https://hexdocs.pm/test_oof](https://hexdocs.pm/test_oof).
+
+## Development
+### Run the tests
+```
+$ mix test
+```
+
+Or run the linter and tests combined:
+```
+$ make test
+```
+
+### Run the linter
+```
+$ make lint
+```
 
 ## Roadmap
 * [ ] Handle umbrella projects
