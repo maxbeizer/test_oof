@@ -65,7 +65,7 @@ $ make lint
 * [ ] Handle umbrella projects
 * [x] Make it more configurable
 * [ ] Add an option to auto-correct
-* [ ] Add an option to ignore a list of false positives
+* [x] Add an option to ignore a list of false positives
 
 ## License
 MIT. See LICENSE.

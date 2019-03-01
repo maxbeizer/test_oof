@@ -17,5 +17,24 @@ defmodule TestOofTest do
         )
       end
     end
+
+    test "respsects ignore config" do
+      result =
+        TestOof.ensure_test_files_are_exs!(
+          test_dir: File.cwd!() <> "/test_ignore",
+          ignore: ["ignore_me_test", "maybe_ignore_me_too_test"]
+        )
+
+      assert :ok == result
+    end
+
+    test "respsects ignore config, but does not ignore everything" do
+      assert_raise WrongFileExtensionError, ~r/The following test files/, fn ->
+        TestOof.ensure_test_files_are_exs!(
+          test_dir: File.cwd!() <> "/test_ignore",
+          ignore: ["ignore_me_test"]
+        )
+      end
+    end
   end
 end

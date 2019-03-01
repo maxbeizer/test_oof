@@ -25,10 +25,13 @@ defmodule TestOof do
 
   @elixir_script_extension ".exs"
   @type test_dir :: String.t()
-  @type option :: {:test_dir, test_dir()}
-  @type t :: %__MODULE__{test_dir: test_dir()}
+  # Maybe add regex below?
+  @type ignore :: String.t()
+  @type ignores :: [ignore]
+  @type option :: {:test_dir, test_dir()} | {:ignore, ignores}
+  @type t :: %__MODULE__{test_dir: test_dir(), ignore: ignores()}
 
-  defstruct(test_dir: File.cwd!() <> "/test")
+  defstruct(test_dir: File.cwd!() <> "/test", ignore: [])
 
   defmodule WrongFileExtensionError do
     defexception [:message]
@@ -54,6 +57,7 @@ defmodule TestOof do
     result =
       config
       |> fetch_all_test_files()
+      |> Enum.filter(&attended?(&1, config))
       |> Enum.filter(&test_file?/1)
       |> Enum.filter(&non_elixir_script_extension?/1)
 
@@ -84,6 +88,19 @@ defmodule TestOof do
 
   defp non_elixir_script_extension?(path) do
     Path.extname(path) != @elixir_script_extension
+  end
+
+  defp attended?(_path, %{ignore: []}), do: true
+
+  defp attended?(path, %{ignore: paths}) do
+    do_not_ignore?(path, paths, true)
+  end
+
+  defp do_not_ignore?(_path, _paths, false), do: false
+  defp do_not_ignore?(_path, [], result), do: result
+
+  defp do_not_ignore?(path, [head | tail], _result) do
+    do_not_ignore?(path, tail, path =~ head)
   end
 
   defp do_config([]), do: %__MODULE__{}
