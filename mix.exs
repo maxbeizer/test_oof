@@ -1,20 +1,17 @@
 defmodule TestOof.MixProject do
   use Mix.Project
 
-  def project do
+  @version "0.1.0"
+
+  def(project) do
     [
       app: :test_oof,
-      version: "0.1.0",
-      elixir: "~> 1.7",
+      version: @version,
+      elixir: "~> 1.7 or ~> 1.8",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       description: "Never miss the compiler warning for _test.ex files again.",
-      package: [
-        name: "test_oof",
-        files: ~w(lib .formatter.exs mix.exs README* LICENSE* CHANGELOG*),
-        licenses: ["MIT"],
-        links: %{"GitHub" => "https://github.com/maxbeizer/test_oof"}
-      ],
+      package: package(),
       source_url: "https://github.com/maxbeizer/test_oof",
       homepage_url: "https://github.com/maxbeizer/test_oof"
     ]
@@ -29,6 +26,15 @@ defmodule TestOof.MixProject do
   defp deps do
     [
       {:ex_doc, "~> 0.19", only: :dev, runtime: false}
+    ]
+  end
+
+  defp package do
+    [
+      name: "test_oof",
+      files: ~w(lib .formatter.exs mix.exs README* LICENSE* CHANGELOG*),
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/maxbeizer/test_oof"}
     ]
   end
 end
