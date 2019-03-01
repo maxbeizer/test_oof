@@ -31,7 +31,7 @@ by adding `test_oof` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:test_oof, "~> 0.1.0", only: :test}
+    {:test_oof, "~> 0.2.0", only: :test}
   ]
 end
 ```
@@ -41,6 +41,11 @@ Then add the following to your `test_helper.exs`
 ```elixir
 TestOof.ensure_test_files_are_exs!()
 ```
+
+## Configuration
+`test_oof` supports the following options as configuration:
+* `test_dir` (string): Path to where the tests live, e.g. `File.cwd!() <> "/test"`
+* `ignore` (list): Paths to ignore when checking extensions—false positives., e.g. `["some_cool_test"]`
 
 Documentation can be found at
 [https://hexdocs.pm/test_oof](https://hexdocs.pm/test_oof).

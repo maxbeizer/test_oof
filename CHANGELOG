@@ -6,3 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Changed
+
+## [0.2.0] - 2019-02-28
+### Added
+- Configure test_oof with location of test_dir and list of files to ignore
