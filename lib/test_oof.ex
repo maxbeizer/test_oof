@@ -24,6 +24,11 @@ defmodule TestOof do
   """
 
   @elixir_script_extension ".exs"
+  @type test_dir :: String.t()
+  @type option :: {:test_dir, test_dir()}
+  @type t :: %__MODULE__{test_dir: test_dir()}
+
+  defstruct(test_dir: File.cwd!() <> "/test")
 
   defmodule WrongFileExtensionError do
     defexception [:message]
@@ -42,10 +47,12 @@ defmodule TestOof do
   ends with `_test` and then filter out all files that end with `.exs`. If
   any files remain, raise the WrongFileExtensionError exception.
   """
-  @spec ensure_test_files_are_exs!(String.t()) :: :ok | no_return()
-  def ensure_test_files_are_exs!(dir \\ File.cwd!() <> "/test") do
+  @spec ensure_test_files_are_exs!([option]) :: :ok | no_return()
+  def ensure_test_files_are_exs!(raw_config \\ []) do
+    config = do_config(raw_config)
+
     result =
-      dir
+      config
       |> fetch_all_test_files()
       |> Enum.filter(&test_file?/1)
       |> Enum.filter(&non_elixir_script_extension?/1)
@@ -59,12 +66,12 @@ defmodule TestOof do
     end
   end
 
-  defp fetch_all_test_files(dir) do
-    expand(File.ls(dir), dir)
+  defp fetch_all_test_files(%{test_dir: test_dir}) do
+    expand(File.ls(test_dir), test_dir)
   end
 
   defp expand({:ok, files}, path) do
-    Enum.flat_map(files, &fetch_all_test_files("#{path}/#{&1}"))
+    Enum.flat_map(files, &fetch_all_test_files(%{test_dir: "#{path}/#{&1}"}))
   end
 
   defp expand({:error, _}, path), do: [path]
@@ -77,5 +84,13 @@ defmodule TestOof do
 
   defp non_elixir_script_extension?(path) do
     Path.extname(path) != @elixir_script_extension
+  end
+
+  defp do_config([]), do: %__MODULE__{}
+  defp do_config(config), do: do_config(config, %__MODULE__{})
+  defp do_config([], config), do: config
+
+  defp do_config([head | tail], config) do
+    do_config(tail, struct(config, [head]))
   end
 end

@@ -63,7 +63,7 @@ $ make lint
 
 ## Roadmap
 * [ ] Handle umbrella projects
-* [ ] Make it more configurable
+* [x] Make it more configurable
 * [ ] Add an option to auto-correct
 * [ ] Add an option to ignore a list of false positives
 
